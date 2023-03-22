@@ -73,8 +73,6 @@ int largestInt(int i1, int i2, int i3);
 int LOG_LEVEL = 0;
 
 //convert obj file to sins of a solar empire compatible .mesh
-//absolutely, positively fuck all current other methods of producing a .mesh file. Fuck softimage XSI. Fuck all the convoluted stupid stuff you have to do that doesn't even work half the time. Fuck. It. All.
-//Everyone on the original development team involved in the decision of hackfucking a stupid ass special 3d format for this game INSTEAD OF STICKING TO SENSIBLE STANDARDS like obj deserves a high five in the fucking face with a chair
 //xsi is a bullshit-ass format that should've never existed
 int main()
 {
@@ -291,7 +289,7 @@ void generateMesh(ofstream *file, vector<Vector4> verticies, vector<Vector3> tex
         //*file << char(9) << char(9) <<"Tangent [ " << texCoordinates.at(pointTex.at(i)-1).x << " " << texCoordinates.at(pointTex.at(i)-1).y << " " << texCoordinates.at(pointTex.at(i)-1).z << " ]" << endl;
         *file << char(9) << char(9) <<"Tangent [ 0.000000 0.000000 0.000000 ]" << endl;//this tangent bullshit is really fucking lame
 
-        *file << char(9) << char(9) << "Color 0" << endl;
+        *file << char(9) << char(9) << "Color 0" << endl ;//always 0
 
         *file << char(9) << char(9) << "U0 " << texCoordinates.at(pointTex.at(i)-1).x << endl;
         *file << char(9) << char(9) << "V0 " << texCoordinates.at(pointTex.at(i)-1).y << endl;
@@ -310,7 +308,7 @@ void generateMesh(ofstream *file, vector<Vector4> verticies, vector<Vector3> tex
         *file << char(9) << char(9) << "iMaterial 0" << endl;   //iMaterial is always 0, thank fuck
     }
 
-    /*step 4. Deal with all the trailing bullshit they added at the end for no fucking reason and then made the game engine rely on those values instead of employing common sense. 
+    /*step 4. Deal with all the trailing bullshit they added at the end
     EX:
     NumCachedVertexIndicesInDirection:UP 2750
 	Index 12960
@@ -329,7 +327,7 @@ void generateMesh(ofstream *file, vector<Vector4> verticies, vector<Vector3> tex
     // normal z = -1 == "BACK"
     // normal z = 1 == "FRONT"
 
-    //i *GUESS* whichever field has the highest value is the direction a vertex is "facing"
+    //i *GUESS* whichever field has the highest normal value is the direction a vertex is "facing"
     vector<int> upVerts = vector<int>();
     vector<int> downVerts = vector<int>();
     vector<int> rightVerts = vector<int>();
