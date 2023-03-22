@@ -1,0 +1,1 @@
+this is a converter that can be used to convert standard obj files directly to Sins of a Solar Empire compatible mesh files. It doesn't currently work acceptably (the mesh will look all messed up) but it can still produce mesh files that the game will accept without crashing.
