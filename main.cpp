@@ -84,11 +84,18 @@ int LOG_LEVEL = 0;
 
 //convert obj file to sins of a solar empire compatible .mesh
 //xsi is a bullshit-ass format that should've never existed
-int main()
+int main(int argc, char *argv[])
 {
-    //note: all 3d stuff I ever make (including this program) ONLY WORKS for obj files exported with blender with all faces converted to tris
-    //to do this, go to edit mode, "a" to select all faces. Then click on the "face" button and then "triangulate faces". Note that only triangle faces are valid and quads are not supported (even though quads are usually supported in 3d stuff I make, just not in this one)
-    //This should go without saying but there can be ABSOLUTELY NO N-GONS
+    string inputFilename = "input.obj";
+    if (argc > 1)
+    {
+        //inputFilename = argv[0];
+        cout << "filename = " << argv[1] << endl;
+        inputFilename = argv[1];
+    }
+    // note: all 3d stuff I ever make (including this program) ONLY WORKS for obj files exported with blender with all faces converted to tris
+    // to do this, go to edit mode, "a" to select all faces. Then click on the "face" button and then "triangulate faces". Note that only triangle faces are valid and quads are not supported (even though quads are usually supported in 3d stuff I make, just not in this one)
+    // This should go without saying but there can be ABSOLUTELY NO N-GONS
     vector<Vector4> geoVerts = vector<Vector4>(); //store 3ds geometric coordinates
     vector<Vector3> texCoords = vector<Vector3>(); //store 3ds texture coordinates
     vector<Vector3> vertexNormals = vector<Vector3>(); //vertex normals. should always contain 3 floats if exporting to obj from blender using "the correct method"
